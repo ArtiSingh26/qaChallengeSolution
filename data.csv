@@ -1,0 +1,10 @@
+﻿input,statusCode,expectedResult
+4,200,24
+300,200,720
+we,400,Not a valid input, Please provide valid positive integer
+4.5,400,Not a valid input, Please provide valid positive integer
+-3,400,Not a valid input, Please provide valid positive integer
+@3,400,Not a valid input, Please provide valid positive integer
+03,200,6
+3333333333333333333333333333333333333333333333333333333333333333333333333333333333333,400,Not a valid input, Please provide valid positive integer
+3E,400,Not a valid input, Please provide valid positive integer

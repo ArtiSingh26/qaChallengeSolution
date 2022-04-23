@@ -1,0 +1,83 @@
+{
+	"info": {
+		"_postman_id": "01b7f2a1-780f-4791-9bcd-25219b6c7f3f",
+		"name": "Factorial",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "generate Factorial",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(`For input '${data['input']}'Status code should be '${data['statusCode']}'`, function () {\r",
+							"    pm.response.to.have.status(data['statusCode']);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(`For input '${data['input']}' Result should be '${data['expectedResult']}'`, function () {\r",
+							"    /**\r",
+							"     * Extract answer only if request was success else \r",
+							"     * compare the response with expectedResult  \r",
+							"     * This ensures test wont throw exception if end point break\r",
+							"     * */\r",
+							"    const answer = (data['statusCode'] === 200 && pm.response.code === 200) ?\r",
+							"        pm.response.json().answer :\r",
+							"        // currently response to invalid input is documented\r",
+							"        // so assuming response to be text\r",
+							"        pm.response.text()\r",
+							"   \r",
+							"    pm.expect(answer).to.be.eq(data['expectedResult'])\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "number",
+							"value": "{{input}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseURL}}/factorial",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"factorial"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "http://qainterview.pythonanywhere.com"
+		}
+	]
+}
